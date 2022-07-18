@@ -15,3 +15,4 @@ A backend console application intended to display proffiency as building an SQL 
 
 ## Demo 
 
+https://youtu.be/tKzMyqYY3LM
