@@ -48,6 +48,8 @@ const promptUser = () => {
             process.exit();
         } else if (answers.directory === 'Add Role'){
             createRole();
+        } else if (answers.directory === 'Add Employee'){
+            createEmployee();
         }
     });
 }
@@ -132,12 +134,12 @@ const createRole = () => {
             message: 'Please enter a role (Required)'
         },
         {
-            type: 'number',
+            type: 'input',
             name: 'salary',
             message: 'Please enter a role salary with a number value (required)',
         },
         {
-            type: 'number',
+            type: 'input',
             name: 'id',
             message: 'please enter a new department ID for this role (required)',
         }
@@ -159,7 +161,45 @@ const createRole = () => {
     })
 }
 // add an employee
+const createEmployee = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'first_name',
+            message: 'Please enter first name (required)',
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: 'Please enter employees last name (required)'
+        },
+        {
+            type: 'number',
+            name: 'role',
+            message: 'Please enter employees role ID (required)',
+        },
+        {
+            type: 'number',
+            name:'manager',
+            message: 'Please enter their manager ID number (required)',
+        },
+    ])
+    .then ((answers) => {
+        const sql = `
+        INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUE (?, ?, ?,?)`;
+        const params = [answers.first_name, answers.last_name, answers.role, answers.manager];
 
+        db.query(sql, params, (err, result) => {
+            if (err){
+                console.log(err);
+                return;
+            }
+            console.log('role successfully created');
+            console.table(result);
+            promptUser();
+        })
+    })
+}
 // update an employee
 
 promptUser();
