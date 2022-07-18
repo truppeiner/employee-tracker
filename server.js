@@ -46,6 +46,8 @@ const promptUser = () => {
             createDepartment();
         } else if (answers.directory === 'Exit'){
             process.exit();
+        } else if (answers.directory === 'Add Role'){
+            createRole();
         }
     });
 }
@@ -122,7 +124,40 @@ const createDepartment = () => {
     })
 }
 // add a role 
+const createRole = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name: 'name',
+            message: 'Please enter a role (Required)'
+        },
+        {
+            type: 'number',
+            name: 'salary',
+            message: 'Please enter a role salary with a number value (required)',
+        },
+        {
+            type: 'number',
+            name: 'id',
+            message: 'please enter a new department ID for this role (required)',
+        }
+    ])
+    .then ((answers) => {
+        const sql = `
+        INSERT INTO roles (title, salary, department_id) VALUE (?, ?, ?)`;
+        const params = [answers.name, answers.salary, answers.id];
 
+        db.query(sql, params, (err, result) => {
+            if (err){
+                console.log(err);
+                return;
+            }
+            console.log('role successfully created');
+            console.table(result);
+            promptUser();
+        })
+    })
+}
 // add an employee
 
 // update an employee
