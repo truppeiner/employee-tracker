@@ -31,7 +31,8 @@ const promptUser = () => {
                         'View All Roles',
                         'Add Role',
                         'View All Departments',
-                        'Add Department'],
+                        'Add Department',
+                        'Exit'],
         }
     ])
     .then((answers) => {
@@ -41,6 +42,10 @@ const promptUser = () => {
             viewAllDepartments();
         } else if (answers.directory === 'View All Roles'){
             viewAllRoles();
+        } else if (answers.directory === 'Add Department'){
+            createDepartment();
+        } else if (answers.directory === 'Exit'){
+            process.exit();
         }
     });
 }
@@ -92,7 +97,30 @@ const viewAllRoles = () => {
     })
 };
 // Add a department
+const createDepartment = () => {
+    return inquirer.prompt([
+        {
+            type: 'input',
+            name:'name',
+            message: 'Please enter a department name (required)',
+        },
+    ])
+    .then ((answers) => {
+        const sql = `
+        INSERT INTO department (name) VALUE (?)`;
+        const params = [answers.name];
 
+        db.query(sql, params, (err, result) => {
+            if (err){
+                console.log(err);
+                return;
+            }
+            console.log('department successfully created');
+            console.table(result);
+            promptUser();
+        })
+    })
+}
 // add a role 
 
 // add an employee
