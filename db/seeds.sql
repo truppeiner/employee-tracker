@@ -12,7 +12,7 @@ VALUES
 (2, 'management'),
 (3, 'UI/UX'),
 (4, 'front-end'),
-(5, 'human-resources'),
+(5, 'human-resources');
 
 INSERT INTO employee (id, first_name, last_name, role_id, manager_id)
 VALUES
@@ -23,4 +23,4 @@ VALUES
 (5, 'Steven', 'Stamkos', 3, 2),
 (6, 'Victor', 'Hedman', 4, 2),
 (7, 'Riley', 'Nash', 4, 2),
-(8, 'Patrick', 'Maroon', 5, 2),
+(8, 'Patrick', 'Maroon', 5, 2);
