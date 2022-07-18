@@ -14,12 +14,6 @@ db.connect((err) => {
 });
 
 const promptUser = () => {
-    console.log(`
-    =======================================
-                    EMPLOYEE
-                    MANAGER
-    =======================================
-    `);
     return inquirer.prompt([
         {
             type: 'list',
@@ -202,4 +196,14 @@ const createEmployee = () => {
 }
 // update an employee
 
+// function so intial text only shows up once 
+const displayMessage = function(){
+    console.log(`
+    =======================================
+                    EMPLOYEE
+                    MANAGER
+    =======================================
+    `);
+}
+displayMessage();
 promptUser();
