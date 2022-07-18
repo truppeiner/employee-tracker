@@ -28,6 +28,7 @@ const promptUser = () => {
             choices: [  'View All Employees',
                         'Add Employee',
                         'Update Employee Role',
+                        'View All Roles',
                         'Add Role',
                         'View All Departments',
                         'Add Department'],
@@ -36,6 +37,10 @@ const promptUser = () => {
     .then((answers) => {
         if (answers.directory === 'View All Employees'){
             viewAllEmployees();
+        } else if (answers.directory === 'View All Departments'){
+            viewAllDepartments();
+        } else if (answers.directory === 'View All Roles'){
+            viewAllRoles();
         }
     });
 }
@@ -54,14 +59,38 @@ const viewAllEmployees = () => {
           promptUser();
         
     })
-}
+};
 
 // pseudacode for what I need 
 
 // view all departments
-
+const viewAllDepartments = () => {
+    const sql = `
+    SELECT * FROM department
+    `;
+    db.query(sql, (err, rows) => {
+        if (err){
+            console.log(err);
+            return;
+        } console.table(rows);
+          promptUser();
+        
+    })
+};
 // view all roles
-
+const viewAllRoles = () => {
+    const sql = `
+    SELECT * FROM roles
+    `;
+    db.query(sql, (err, rows) => {
+        if (err){
+            console.log(err);
+            return;
+        } console.table(rows);
+          promptUser();
+        
+    })
+};
 // Add a department
 
 // add a role 
