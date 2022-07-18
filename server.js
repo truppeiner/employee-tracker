@@ -33,9 +33,8 @@ const promptUser = () => {
                         'Add Department'],
         }
     ])
-    .then((answer) => {
-        if (answer.options === 'View All Employees'){
-            console.log('test')
+    .then((answers) => {
+        if (answers.directory === 'View All Employees'){
             viewAllEmployees();
         }
     });
