@@ -1,3 +1,5 @@
-DROP DATABASE IF EXISTS management;
-CREATE DATABASE management;
-USE management; 
+DROP DATABASE IF EXISTS manage;
+
+CREATE DATABASE manage;
+
+USE manage; 

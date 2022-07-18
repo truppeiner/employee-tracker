@@ -2,9 +2,12 @@ const mysql = require('mysql2');
 
 const db = mysql.createConnection({
     host: 'localhost',
-    user: 'root',
+    // SQL USERNAME
+    user:'root',
+    //PASSWORD
     password: 'Nn35746228495',
-    database: 'management'
-})
+    database: 'manage'
+},
+console.log('Connected to the manage database'));
 
 module.exports = db;

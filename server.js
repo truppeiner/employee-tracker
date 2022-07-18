@@ -3,9 +3,14 @@ const cTable = require('console.table');
 const db = require('./db/connection');
 
 
-// connect to database
+// // connect to database
 db.connect((err) => {
-    if (err) throw err;
+    if (err) {
+        console.log('Not Connected to Database');
+        console.log(err);
+    } else {
+        console.log('Connected to database!');
+    }
 });
 
 const promptUser = () => {
@@ -20,16 +25,17 @@ const promptUser = () => {
             type: 'list',
             name: 'directory',
             message: 'What would you like to do?',
-            choices: ['View All Employees',
+            choices: [  'View All Employees',
                         'Add Employee',
                         'Update Employee Role',
                         'Add Role',
                         'View All Departments',
-                        'Add Department']
+                        'Add Department'],
         }
     ])
     .then((answer) => {
-        if (answer.options === "View All Employees"){
+        if (answer.options === 'View All Employees'){
+            console.log('test')
             viewAllEmployees();
         }
     });
@@ -40,16 +46,19 @@ const viewAllEmployees = () => {
     const sql = `
     SELECT * FROM employee
     `;
+
     db.query(sql, (err, rows) => {
         if (err){
             console.log(err);
             return;
-        }
-        console.table(rows);
-        promptUser();
+        } console.table(rows);
+          promptUser();
+        
     })
 }
+
 // pseudacode for what I need 
+
 // view all departments
 
 // view all roles
